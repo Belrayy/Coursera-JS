@@ -1,20 +1,29 @@
 #!/bin/bash
 
-function guess_files {
-    local file_count=$(ls -1 | wc -l) # Compte le nombre de fichiers dans le répertoire actuel
+# Function to count the number of files in the current directory
+count_files() {
+    ls -1 | wc -l
+}
+
+# Main game logic
+play_game() {
+    local correct=$(count_files)
+    local guess
+
     while true; do
-        echo "Combien de fichiers se trouvent dans le répertoire actuel ?"
+        echo "How many files are in the current directory?"
         read guess
-        if [[ $guess -eq $file_count ]]; then
-            echo "Félicitations ! Vous avez trouvé le bon nombre : $file_count."
-            break
-        elif [[ $guess -lt $file_count ]]; then
-            echo "C'est trop bas. Essayez encore."
+
+        if [[ $guess -lt $correct ]]; then
+            echo "Your guess is too low. Try again!"
+        elif [[ $guess -gt $correct ]]; then
+            echo "Your guess is too high. Try again!"
         else
-            echo "C'est trop haut. Essayez encore."
+            echo "Congratulations! You guessed the correct number of files."
+            break
         fi
     done
 }
 
-# Appel de la fonction
-guess_files
+# Start the game
+play_game
