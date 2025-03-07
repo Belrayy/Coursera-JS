@@ -1,1 +1,1 @@
-# Coursera-JS
+# Coursera-EMSI-HONORIS
